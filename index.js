@@ -45,6 +45,14 @@ async function run() {
             const result = await RegUserCollection.insertOne(regUser);
             res.json(result);
         })
+        //ADD new event
+        app.post('/services', async (req, res) => {
+            const services = req.body;
+            const result = await eventCollection.insertOne(services);
+            res.json(result);
+        })
+
+
 
 
     } finally {
