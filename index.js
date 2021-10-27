@@ -51,6 +51,13 @@ async function run() {
             const result = await eventCollection.insertOne(services);
             res.json(result);
         })
+        //GET API my events
+        app.get('/myEvent/:email', async (req, res) => {
+            const email = req.params.email;
+            const query = { email: email };
+            const myEvents = await RegUserCollection.findOne(query);
+            res.json(myEvents);
+        })
 
 
 
