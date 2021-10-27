@@ -24,6 +24,7 @@ async function run() {
         // console.log('database connect successfully');
         const database = client.db("volunteer");
         const eventCollection = database.collection("events");
+        const RegUserCollection = database.collection("regUser");
 
         //GET API
         app.get('/services', async (req, res) => {
@@ -37,6 +38,12 @@ async function run() {
             const query = { _id: ObjectId(id) };
             const service = await eventCollection.findOne(query);
             res.json(service);
+        })
+        //ADD REG USER API
+        app.post('/regUser', async (req, res) => {
+            const regUser = req.body;
+            const result = await RegUserCollection.insertOne(regUser);
+            res.json(result);
         })
 
 
