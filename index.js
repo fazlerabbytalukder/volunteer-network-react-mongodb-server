@@ -52,11 +52,17 @@ async function run() {
             res.json(result);
         })
         //GET API my events
-        app.get('/myEvent/:email', async (req, res) => {
-            const email = req.params.email;
-            const query = { email: email };
-            const myEvents = await RegUserCollection.findOne(query);
-            res.json(myEvents);
+        app.get('/myEvent', async (req, res) => {
+            const cursor = RegUserCollection.find({});
+            const events = await cursor.toArray();
+            res.send(events);
+        })
+        //DELETE Event
+        app.delete('/myEvent/:id', async (req, res) => {
+            const id = req.params.id;
+            const query = { _id:ObjectId(id) };
+            const result = await RegUserCollection.deleteOne(query);
+            res.json(result);
         })
 
 
