@@ -65,6 +65,14 @@ async function run() {
             res.json(result);
         })
 
+        app.get('/myEvent/:uid', async (req, res) => {
+            const uid = [req.params.uid];
+            const query = { uid: { $in: uid } };
+            const result = await RegUserCollection.find(query).toArray();
+            // console.log(result);
+            res.json(result);
+        })
+
 
 
 
